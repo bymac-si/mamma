@@ -1,9 +1,8 @@
-<h1>New product</h1>
+<h1 class="float-start"> Nuevo Producto 
+  <%= link_to "Volver a Productos", products_path, class: "btn btn-success" %></h1>
+
+<br><br>
 
 <%= render "form", product: @product %>
 
 <br>
-
-<div>
-  <%= link_to "Back to products", products_path %>
-</div>

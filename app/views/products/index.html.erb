@@ -1,9 +1,10 @@
 <h1>Lista de productos</h1>
-<a href="<%= new_product_path %>" class="btn btn-success btn-icon-split">
+<a href="<%= new_product_path %>" class="btn btn-success btn-icon-split bg-gradient-success">
 <span class="icon text-white-50">
   <i class="fas fa-plus"></i>
 </span>
 <span class="text">Crear Producto</span></a>
+<%= link_to 'Exportar a Excel', products_path(format: :xlsx), class:'btn btn-success bg-gradient-success' %>
 <br><br>
 <table class="table">
   <thead>
@@ -19,8 +20,8 @@
       <td><%= product.id%></td>
       <td><%= product.name%></td>
       <td><%= product.reference%></td>
-      <td><%= 0%></td>
-      <td><%= link_to "Detalles", product_path(product), class:'btn btn-success' %></td>
+      <td><%= product.quantity %></td>
+      <td><%= link_to "Detalles", product_path(product), class:'btn btn-success bg-gradient-success' %></td>
     </tr>
     <% end %>
   </tbody>

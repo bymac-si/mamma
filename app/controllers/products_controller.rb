@@ -4,10 +4,22 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+    respond_to do |format|
+      format.html 
+      format.xlsx{
+        response.headers['Content-Disposition'] = 'attachment; filename="productos.xlsx"'
+        }
+    end
   end
 
   # GET /products/1 or /products/1.json
   def show
+    respond_to do |format|
+      format.html 
+      format.xlsx{
+        response.headers['Content-Disposition'] = 'attachment; filename="detalle_producto.xlsx"'
+        }
+    end
   end
 
   # GET /products/new
@@ -55,6 +67,27 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def new_movement
+    @product = Product.find(params[:id])
+    @movement = Movement.new
+  end
+
+  def create_movement
+    @product = Product.find(params[:id])
+    @movement = Movement.new(movement_params)
+    @movement.product_id = @product.id
+    if @movement.save
+      redirect_to @product, notice: 'Movimiento creado correctamente'
+    else
+      flash[:notice] = 'Ha ocurrido un error al crear el movimiento'
+      render :new_movement,  status: :unprocessable_entity
+    end
+  end
+
+  def movement_params
+  params.require(:movement).permit(:quantity, :movement_type, :comment)
   end
 
   private

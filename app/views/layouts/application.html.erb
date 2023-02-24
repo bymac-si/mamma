@@ -40,7 +40,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="images/logo.png">
+                    <img src="<%= asset_path 'logo.png'%>" width="65px">
                 </div>
                 <div class="sidebar-brand-text mx-3">Mamma Savina </div>
             </a>
@@ -100,7 +100,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        
+                        <span>Copyright &copy; 2023 <img src="<%= asset_path 'bymac_logo.png'%>" width="75px"></span>
                     </div>
                 </div>
             </footer>

@@ -1,10 +1,63 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @product %>
-
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
-
-  <%= button_to "Destroy this product", @product, method: :delete %>
+<div class="row">
+  <div class="col-lg-12">
+    <h1>Detalle Producto</h1>
+    <%= link_to "Listado", products_path, class:'btn btn-success bg-gradient-success'%>
+    <%= link_to "Editar", edit_product_path(@product), class:'btn btn-success bg-gradient-success'%>
+    <%= link_to "Eliminar", @product, method: :delete, class:'btn btn-success bg-gradient-success'%>
+    <%= link_to "Crear Movimiento", new_movement_product_path(@product), class:'btn btn-success bg-gradient-success'%>
+    <%= link_to "Exportar a Excel", product_path(@product, format: :xlsx), class:'btn btn-success bg-gradient-success'%>
+    <br><br>
+    <div class="card">
+      <table class="table">
+        <tr>
+          <td><b>Nombre del Producto:</b></td>
+          <td><%= @product.name %></td>
+        </tr>
+        <tr>
+          <td><b>Referencia:</b></td>
+          <td><%= @product.reference%></td>
+        </tr>
+        <tr>
+          <td><b>Descripción:</b></td>
+          <td><%=@product.description %></td>
+        </tr>
+        <tr>
+          <td><b>Cantidad Actual:</b></td>
+          <td><%= @product.quantity%></td>
+        </tr>
+        <tr>
+        <td><b>Fecha Creación:</b></td>
+        <td><%=@product.created_at%></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <h2>Movimientos</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Comentario</th>
+            <th>Fecha/hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @product.movements.each do |movement| %>
+          <tr>
+            <td><%= movement.movement_type_name %></td>
+            <td><%= movement.quantity %></td>
+            <td><%= movement.comment %></td>
+            <td><%= movement.created_at %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
